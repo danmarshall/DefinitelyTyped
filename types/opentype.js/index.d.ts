@@ -7,6 +7,18 @@
 
 export as namespace opentype;
 
+/**
+ * This is equivalent to CanvasRenderingContext2D and is available in the "dom" lib of TypeScript, 
+ * but is not available in web workers or Node.js without a shim for canvas.
+ */
+export type _CanvasRenderingContext2D = any;
+
+/**
+ * This is equivalent to SVGPathElement and is available in the "dom" lib of TypeScript, 
+ * but is not available in web workers or Node.js without a shim for SVG DOM.
+ */
+export type _SVGPathElement = any;
+
 /******************************************
  * FONT
  ******************************************/
@@ -31,7 +43,7 @@ export class Font {
     charToGlyphIndex(s: string): number;
     download(fileName?: string): void;
     draw(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         text: string,
         x?: number,
         y?: number,
@@ -39,7 +51,7 @@ export class Font {
         options?: RenderOptions
     ): void;
     drawMetrics(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         text: string,
         x?: number,
         y?: number,
@@ -47,7 +59,7 @@ export class Font {
         options?: RenderOptions
     ): void;
     drawPoints(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         text: string,
         x?: number,
         y?: number,
@@ -209,21 +221,21 @@ export class Glyph {
     addUnicode(unicode: number): void;
     bindConstructorValues(options: GlyphOptions): void;
     draw(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         x?: number,
         y?: number,
         fontSize?: number,
         options?: RenderOptions
     ): void;
     drawMetrics(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         x?: number,
         y?: number,
         fontSize?: number,
         options?: RenderOptions
     ): void;
     drawPoints(
-        ctx: CanvasRenderingContext2D,
+        ctx: _CanvasRenderingContext2D,
         x?: number,
         y?: number,
         fontSize?: number,
@@ -340,14 +352,14 @@ export class Path {
         x: number,
         y: number
     ) => void;
-    draw(ctx: CanvasRenderingContext2D): void;
+    draw(ctx: _CanvasRenderingContext2D): void;
     extend(pathOrCommands: Path | PathCommand[] | BoundingBox): void;
     getBoundingBox(): BoundingBox;
     lineTo(x: number, y: number): void;
     moveTo(x: number, y: number): void;
     quadraticCurveTo(x1: number, y1: number, x: number, y: number): void;
     quadTo: (x1: number, y1: number, x: number, y: number) => void;
-    toDOMElement(decimalPlaces: number): SVGPathElement;
+    toDOMElement(decimalPlaces: number): _SVGPathElement;
     toPathData(decimalPlaces: number): string;
     toSVG(decimalPlaces: number): string;
     unitsPerEm: number;

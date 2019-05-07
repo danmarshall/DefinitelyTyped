@@ -1,11 +1,11 @@
 const x = 0;
 const y = 0;
 const fontSize = 72;
-let ctx: CanvasRenderingContext2D;
+let ctx: opentype._CanvasRenderingContext2D;
 
 opentype.load('fonts/Roboto-Black.ttf', (err, font) => {
     if (err) {
-        alert('Font could not be loaded: ' + err);
+        throw 'Font could not be loaded: ' + err;
     } else {
         const path = font.getPath('Hello, World!', 0, 150, 72);
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
@@ -63,12 +63,12 @@ const forEachWidth: number = font.forEachGlyph(
         kerning: true
     },
     (glyph: opentype.Glyph, x: number, y: number, fontSize: number) => {
-        console.log({
+        const result = {
             glyph,
             x,
             y,
             fontSize
-        });
+        };
     }
 );
 const fontPath: opentype.Path = font.getPath('text', x, y, fontSize, {});
@@ -116,4 +116,4 @@ const pathBBox: opentype.BoundingBox = aPath.getBoundingBox();
 aPath.draw(ctx);
 const pathData: string = aPath.toPathData(7);
 const pathSvg: string = aPath.toSVG(7);
-const pathDom: SVGPathElement = aPath.toDOMElement(7);
+const pathDom = aPath.toDOMElement(7);
